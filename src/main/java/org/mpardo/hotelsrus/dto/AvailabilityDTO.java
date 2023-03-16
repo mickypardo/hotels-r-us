@@ -1,5 +1,6 @@
 package org.mpardo.hotelsrus.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -10,7 +11,7 @@ import java.time.LocalDate;
  * @version 1.0
  *
  */
-public class AvailabilityDTO {
+public class AvailabilityDTO implements Serializable {
 	
 	private Integer id;
 	
