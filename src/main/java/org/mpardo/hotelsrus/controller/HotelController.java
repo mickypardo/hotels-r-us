@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador que realiza de intermediario entre el Frontend y el Servicio
+ * Controlador de Hotel que realiza de intermediario entre el Frontend y el Servicio.
  * 
  * @author micky pardo
  * 
