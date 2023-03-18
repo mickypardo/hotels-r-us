@@ -58,7 +58,7 @@ public class HotelController {
 		} else if (Optional.of(hotelDTO.getName()).isEmpty()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		} else if (hotelService.existsByName(hotelDTO.getName())
-				&& hotelService.getByName(hotelDTO.getName()).get().getId != id) {
+				&& hotelService.findByName(hotelDTO.getName()).get().getId != id) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		
