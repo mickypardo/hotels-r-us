@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -23,6 +25,7 @@ public class Hotel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_hotel")
 	private Integer id;
 	
 	@Column(name = "name")
@@ -31,9 +34,11 @@ public class Hotel {
 	@Column(name = "category")
 	private Integer category;
 	
-	private List<Availability> availabilities; // Relacionar ManyToOne
+	@OneToMany(mappedBy = "hotels", fetch = FetchType.LAZY)
+	private List<Availability> availabilities;
 	
-	private List<Booking> bookings; // Relacionar ManyToOne
+	@OneToMany(mappedBy = "hotels", fetch = FetchType.LAZY)
+	private List<Booking> bookings;
 
 	/**
 	 * Constructor sin parametros.

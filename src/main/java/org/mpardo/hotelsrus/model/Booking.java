@@ -4,9 +4,11 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,9 +25,11 @@ public class Booking {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_booking")
 	private Integer id;
 	
-	private Hotel hotel; // Relacionar OneToMany
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Hotel hotel;
 	
 	@Column(name = "date_from")
 	private LocalDate dateFrom;
