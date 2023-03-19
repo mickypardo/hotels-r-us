@@ -85,7 +85,7 @@ public class HotelController {
 	@GetMapping("/one/{id}")
 	public ResponseEntity<Hotel> findHotelById(@PathVariable("id") Integer id) {
 		
-		if (hotelService.isById(id)) {
+		if (!hotelService.isById(id)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		
