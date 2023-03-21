@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface IAvailabilityRepo extends JpaRepository<Availability, Integer>{
+public interface IAvailabilityRepo extends JpaRepository<Availability, Integer> {
 
 }

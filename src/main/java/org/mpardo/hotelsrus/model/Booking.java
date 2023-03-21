@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,26 +28,29 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_booking")
 	private Integer id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_hotel", nullable = false)
 	private Hotel hotel;
-	
+
 	@Column(name = "date_from")
 	private LocalDate dateFrom;
-	
+
 	@Column(name = "date_to")
 	private LocalDate dateTo;
-	
-	@Column(name = "email")
+
+	@Column(name = "email", nullable = false, unique = false)
 	private String email;
-	
+
 	/**
 	 * Constructor sin parámetros.
 	 */
-	public Booking() {}
+	public Booking() {
+	}
 
 	/**
 	 * Constructor con parámetros sin el 'id'.
+	 * 
 	 * @param dateFrom
 	 * @param dateTo
 	 * @param email
@@ -61,6 +65,7 @@ public class Booking {
 
 	/**
 	 * Getter id
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -69,6 +74,7 @@ public class Booking {
 
 	/**
 	 * Setter id
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -77,6 +83,7 @@ public class Booking {
 
 	/**
 	 * Getter hotel
+	 * 
 	 * @return the hotel
 	 */
 	public Hotel getHotel() {
@@ -85,6 +92,7 @@ public class Booking {
 
 	/**
 	 * Setter hotel
+	 * 
 	 * @param hotel the hotel to set
 	 */
 	public void setHotel(Hotel hotel) {
@@ -93,6 +101,7 @@ public class Booking {
 
 	/**
 	 * Getter dateFrom
+	 * 
 	 * @return the dateFrom
 	 */
 	public LocalDate getDateFrom() {
@@ -101,6 +110,7 @@ public class Booking {
 
 	/**
 	 * Setter dateFrom
+	 * 
 	 * @param dateFrom the dateFrom to set
 	 */
 	public void setDateFrom(LocalDate dateFrom) {
@@ -109,6 +119,7 @@ public class Booking {
 
 	/**
 	 * Getter dateTo
+	 * 
 	 * @return the dateTo
 	 */
 	public LocalDate getDateTo() {
@@ -117,6 +128,7 @@ public class Booking {
 
 	/**
 	 * Setter dateTo
+	 * 
 	 * @param dateTo the dateTo to set
 	 */
 	public void setDateTo(LocalDate dateTo) {
@@ -125,6 +137,7 @@ public class Booking {
 
 	/**
 	 * Getter email
+	 * 
 	 * @return the email
 	 */
 	public String getEmail() {
@@ -133,10 +146,11 @@ public class Booking {
 
 	/**
 	 * Setter email
+	 * 
 	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 }

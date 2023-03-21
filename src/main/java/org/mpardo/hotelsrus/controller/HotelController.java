@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador de Hotel que realiza de intermediario entre el Frontend y el Servicio.
+ * Controlador de Hotel que realiza de intermediario entre el Frontend y el
+ * Servicio.
  * 
  * @author micky pardo
  * 
@@ -28,41 +29,40 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/hotels")
 public class HotelController {
-	
+
 	private IHotelService hotelService;
-	
+
 	@Autowired
 	public HotelController(IHotelService hotelService) {
-		
+
 		this.hotelService = hotelService;
-		
+
 	}
-	
+
 	// Crear un hotel en la BBDD
 	@PostMapping("/ins")
 	public ResponseEntity<?> createHotel(@RequestBody HotelDTO hotelDTO) {
-		
-		if (Optional.of(hotelDTO.getName()).isEmpty()) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		} else if (hotelService.isByName(hotelDTO.getName())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
-		
+
+//		if (Optional.of(hotelDTO.getName()).isEmpty()) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//		} else if (hotelService.isByName(hotelDTO.getName())) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//		}
+
 		String name = hotelDTO.getName();
 		Integer category = hotelDTO.getCategory();
 		Hotel hotel = new Hotel(name, category);
-		
+
 		hotelService.create(hotel);
-		
+
 		return ResponseEntity.status(HttpStatus.CREATED).build();
-		
+
 	}
-	
+
 	// Actualizar un hotel por el ID
 	@PutMapping("/mod/{id}")
-	public ResponseEntity<?> updateHotel(@PathVariable("id") Integer id, 
-			@RequestBody HotelDTO hotelDTO) {
-		
+	public ResponseEntity<?> updateHotel(@PathVariable("id") Integer id, @RequestBody HotelDTO hotelDTO) {
+
 		if (!hotelService.isById(id)) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		} else if (Optional.of(hotelDTO.getName()).isEmpty()) {
@@ -71,37 +71,37 @@ public class HotelController {
 				&& hotelService.getByName(hotelDTO.getName()).get().getId() != id) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-		
+
 		Hotel hotel = hotelService.getOne(id).get();
 		// TO-DO cargar los setters de Hotel con el los getters del HotelDTO
-		
+
 		hotelService.update(hotel);
-		
+
 		return ResponseEntity.status(HttpStatus.OK).build();
-		
+
 	}
-	
+
 	// Consultar un hotel por el ID
 	@GetMapping("/one/{id}")
 	public ResponseEntity<Hotel> findHotelById(@PathVariable("id") Integer id) {
-		
+
 		if (!hotelService.isById(id)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-		
+
 		Hotel hotel = hotelService.getOne(id).get();
 		return ResponseEntity.status(HttpStatus.OK).body(hotel);
-		
+
 	}
-	
+
 	// Obtener todos los hoteles existentes en la BBDD
 	@GetMapping("/all")
 	public ResponseEntity<List<Hotel>> listHotels() {
-		
+
 		List<Hotel> hotels = hotelService.getAll();
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(hotels);
-		
+
 	}
 
 }

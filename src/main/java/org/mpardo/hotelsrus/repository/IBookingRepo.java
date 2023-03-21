@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface IBookingRepo extends JpaRepository<Booking, Integer>{
+public interface IBookingRepo extends JpaRepository<Booking, Integer> {
 
 }

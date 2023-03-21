@@ -13,17 +13,18 @@ import java.io.Serializable;
 public class HotelDTO implements Serializable {
 
 	private Integer id;
-	
+
 	private String name;
-	
+
 	private Integer category;
 
 	/**
 	 * Constructor de la DTO Hotel.
-	 * @param id es la identidad del hotel de tipo entero
-	 * @param name es el nombre del hotel de tipo cadena
-	 * @param category es la categoria del hotel de tipo entero
-	 * que abarca de 1 a 5 estrellas
+	 * 
+	 * @param id       es la identidad del hotel de tipo entero
+	 * @param name     es el nombre del hotel de tipo cadena
+	 * @param category es la categoria del hotel de tipo entero que abarca de 1 a 5
+	 *                 estrellas
 	 */
 	public HotelDTO(Integer id, String name, Integer category) {
 		super();
@@ -34,6 +35,7 @@ public class HotelDTO implements Serializable {
 
 	/**
 	 * Método que obtiene la identidad del hotel.
+	 * 
 	 * @return la 'id' de tipo Integer
 	 */
 	public Integer getId() {
@@ -42,6 +44,7 @@ public class HotelDTO implements Serializable {
 
 	/**
 	 * Método que introduce la identidad al hotel.
+	 * 
 	 * @param id la 'id' de tipo Integer
 	 */
 	public void setId(Integer id) {
@@ -50,6 +53,7 @@ public class HotelDTO implements Serializable {
 
 	/**
 	 * Método que obtiene el nombre del hotel.
+	 * 
 	 * @return el 'name' de tipo String
 	 */
 	public String getName() {
@@ -58,6 +62,7 @@ public class HotelDTO implements Serializable {
 
 	/**
 	 * Método que introduce el nombre al hotel.
+	 * 
 	 * @param name el 'name' de tipo String
 	 */
 	public void setName(String name) {
@@ -66,6 +71,7 @@ public class HotelDTO implements Serializable {
 
 	/**
 	 * Método que obtiene la categoría del hotel.
+	 * 
 	 * @return la category de tipo Integer
 	 */
 	public Integer getCategory() {
@@ -74,10 +80,11 @@ public class HotelDTO implements Serializable {
 
 	/**
 	 * Método que introduce la categoría al hotel.
+	 * 
 	 * @param category la 'category' de tipo Integer
 	 */
 	public void setCategory(Integer category) {
 		this.category = category;
 	}
-	
+
 }

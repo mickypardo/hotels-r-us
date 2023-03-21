@@ -18,21 +18,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AvailabilityServiceImpl implements IAvailabilityService {
-	
+
 	/********************************
 	 *** INYECCIÓN DE DEPENDENCIA ***
 	 ********************************/
-	
+
 	IAvailabilityRepo availabilityRepo;
-	
+
 	public AvailabilityServiceImpl(IAvailabilityRepo repo) {
 		this.availabilityRepo = repo;
 	}
-	
+
 	/********************************
 	 ************ CREATE ************
 	 ********************************/
-	
+
 	@Override
 	public void create(Availability t) {
 		availabilityRepo.save(t);
@@ -41,7 +41,7 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 	/********************************
 	 ************* READ *************
 	 ********************************/
-	
+
 	@Override
 	public List<Availability> getAll() {
 		return availabilityRepo.findAll();
@@ -51,24 +51,24 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 	public Optional<Availability> getOne(Integer id) {
 		return availabilityRepo.findById(id);
 	}
-	
+
 	public boolean getById(Integer id) {
 		return availabilityRepo.existsById(id);
 	}
-	
+
 	/********************************
 	 ************ UPDATE ************
 	 ********************************/
-	
+
 	@Override
 	public void update(Availability t) {
 		availabilityRepo.save(t);
 	}
-	
+
 	/********************************
 	 ************ DELETE ************
 	 ********************************/
-	
+
 	@Override
 	public void delete(Integer id) {
 		availabilityRepo.deleteById(id);

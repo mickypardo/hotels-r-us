@@ -16,11 +16,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IHotelRepo extends JpaRepository<Hotel, Integer> {
-	
+
 	public boolean existsById(Integer id);
-	
+
 	public boolean existsByName(String name);
-	
+
 	public Optional<Hotel> findByName(String name);
-		
+
 }

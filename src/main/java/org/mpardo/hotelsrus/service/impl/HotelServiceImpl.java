@@ -22,17 +22,17 @@ public class HotelServiceImpl implements IHotelService {
 	/********************************
 	 *** INYECCIÓN DE DEPENDENCIA ***
 	 ********************************/
-	
+
 	IHotelRepo hotelRepo;
-	
+
 	public HotelServiceImpl(IHotelRepo repo) {
 		this.hotelRepo = repo;
 	}
-	
+
 	/********************************
 	 ************ CREATE ************
 	 ********************************/
-	
+
 	@Override
 	public void create(Hotel t) {
 		hotelRepo.save(t);
@@ -41,7 +41,7 @@ public class HotelServiceImpl implements IHotelService {
 	/********************************
 	 ************* READ *************
 	 ********************************/
-	
+
 	@Override
 	public List<Hotel> getAll() {
 		return hotelRepo.findAll();
@@ -51,17 +51,17 @@ public class HotelServiceImpl implements IHotelService {
 	public Optional<Hotel> getOne(Integer id) {
 		return hotelRepo.findById(id);
 	}
-	
+
 	@Override
 	public boolean isById(Integer id) {
 		return hotelRepo.existsById(id);
 	}
-	
+
 	@Override
 	public boolean isByName(String name) {
 		return hotelRepo.existsByName(name);
 	}
-	
+
 	@Override
 	public Optional<Hotel> getByName(String name) {
 		return hotelRepo.findByName(name);
@@ -70,16 +70,16 @@ public class HotelServiceImpl implements IHotelService {
 	/********************************
 	 ************ UPDATE ************
 	 ********************************/
-	
+
 	@Override
 	public void update(Hotel t) {
 		hotelRepo.save(t);
 	}
-	
+
 	/********************************
 	 ************ DELETE ************
 	 ********************************/
-	
+
 	@Override
 	public void delete(Integer id) {
 		hotelRepo.deleteById(id);

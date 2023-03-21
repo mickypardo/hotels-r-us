@@ -23,17 +23,17 @@ public class BookingServiceImpl implements IBookingService {
 	/********************************
 	 *** INYECCIÓN DE DEPENDENCIA ***
 	 ********************************/
-	
+
 	IBookingRepo bookingRepo;
-	
+
 	public BookingServiceImpl(IBookingRepo repo) {
 		this.bookingRepo = repo;
 	}
-	
+
 	/********************************
 	 ************ CREATE ************
 	 ********************************/
-	
+
 	@Override
 	public void create(Booking t) {
 		bookingRepo.save(t);
@@ -42,7 +42,7 @@ public class BookingServiceImpl implements IBookingService {
 	/********************************
 	 ************* READ *************
 	 ********************************/
-	
+
 	@Override
 	public List<Booking> getAll() {
 		return bookingRepo.findAll();
@@ -52,7 +52,7 @@ public class BookingServiceImpl implements IBookingService {
 	public Optional<Booking> getOne(Integer id) {
 		return bookingRepo.findById(id);
 	}
-	
+
 	public boolean getById(Integer id) {
 		return bookingRepo.existsById(id);
 	}
@@ -60,16 +60,16 @@ public class BookingServiceImpl implements IBookingService {
 	/********************************
 	 ************ UPDATE ************
 	 ********************************/
-	
+
 	@Override
 	public void update(Booking t) {
 		bookingRepo.save(t);
 	}
-	
+
 	/********************************
 	 ************ DELETE ************
 	 ********************************/
-	
+
 	@Override
 	public void delete(Integer id) {
 		bookingRepo.deleteById(id);
@@ -78,7 +78,7 @@ public class BookingServiceImpl implements IBookingService {
 	/********************************
 	 ******** OTHER SERVICES ********
 	 ********************************/
-	
+
 	@Override
 	public boolean isById(Integer id) {
 		// TODO Auto-generated method stub

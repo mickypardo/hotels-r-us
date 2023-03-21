@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador de Availability que realiza de intermediario entre el Frontend y el Servicio.
+ * Controlador de Availability que realiza de intermediario entre el Frontend y
+ * el Servicio.
  * 
  * @author micky pardo
  * 
@@ -18,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AvailabilityController {
 
 	private IAvailabilityService availabilityService;
-	
+
 	@Autowired
 	public AvailabilityController(IAvailabilityService availabilityService) {
-		
+
 		this.availabilityService = availabilityService;
-		
+
 	}
-	
+
 }

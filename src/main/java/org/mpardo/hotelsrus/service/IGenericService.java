@@ -3,20 +3,20 @@ package org.mpardo.hotelsrus.service;
 import java.util.List;
 import java.util.Optional;
 
-public interface IGenericService<T,ID>{
+public interface IGenericService<T, ID> {
 
-	//CREATE
+	// CREATE
 	void create(T t);
-	
-	//FIND ALL
+
+	// FIND ALL
 	List<T> getAll();
-	
-	//FIND ONE
+
+	// FIND ONE
 	Optional<T> getOne(ID id);
-	
-	//UPDATE
+
+	// UPDATE
 	void update(T t);
-	
-	//DELETE
+
+	// DELETE
 	void delete(ID id);
 }

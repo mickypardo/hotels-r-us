@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,28 +23,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "availabilities")
 public class Availability {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_availability")
+	@Column(name = "id_availability", nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "date")
 	private LocalDate date;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_hotel", nullable = false)
 	private Hotel hotel;
-	
+
 	@Column(name = "rooms")
 	private Integer rooms;
-	
+
 	/**
 	 * Constructor sin parámetros.
 	 */
-	public Availability() {}
+	public Availability() {
+	}
 
 	/**
 	 * Constructor con parámetros sin 'id'.
+	 * 
 	 * @param date
 	 * @param hotel
 	 * @param rooms
@@ -57,6 +61,7 @@ public class Availability {
 
 	/**
 	 * Getter id
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -65,6 +70,7 @@ public class Availability {
 
 	/**
 	 * Setter id
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -73,6 +79,7 @@ public class Availability {
 
 	/**
 	 * Getter date
+	 * 
 	 * @return the date
 	 */
 	public LocalDate getDate() {
@@ -81,6 +88,7 @@ public class Availability {
 
 	/**
 	 * Setter date
+	 * 
 	 * @param date the date to set
 	 */
 	public void setDate(LocalDate date) {
@@ -89,6 +97,7 @@ public class Availability {
 
 	/**
 	 * Getter hotel
+	 * 
 	 * @return the hotel
 	 */
 	public Hotel getHotel() {
@@ -97,6 +106,7 @@ public class Availability {
 
 	/**
 	 * Setter hotel
+	 * 
 	 * @param hotel the hotel to set
 	 */
 	public void setHotel(Hotel hotel) {
@@ -105,6 +115,7 @@ public class Availability {
 
 	/**
 	 * Getter rooms
+	 * 
 	 * @return the rooms
 	 */
 	public Integer getRooms() {
@@ -113,10 +124,11 @@ public class Availability {
 
 	/**
 	 * Setter rooms
+	 * 
 	 * @param rooms the rooms to set
 	 */
 	public void setRooms(Integer rooms) {
 		this.rooms = rooms;
 	}
-	
+
 }

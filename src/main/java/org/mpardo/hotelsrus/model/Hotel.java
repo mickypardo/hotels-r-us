@@ -22,31 +22,33 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "hotels")
 public class Hotel {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_hotel")
+	@Column(name = "id_hotel", nullable = false)
 	private Integer id;
-	
-	@Column(name = "name")
+
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
-	
+
 	@Column(name = "category")
 	private Integer category;
-	
-	@OneToMany(mappedBy = "hotels", fetch = FetchType.LAZY)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
 	private List<Availability> availabilities;
-	
-	@OneToMany(mappedBy = "hotels", fetch = FetchType.LAZY)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
 	private List<Booking> bookings;
 
 	/**
 	 * Constructor sin parametros.
 	 */
-	public Hotel() {}
+	public Hotel() {
+	}
 
 	/**
 	 * Constructor con parametros sin el 'id'.
+	 * 
 	 * @param name
 	 * @param category
 	 */
@@ -58,6 +60,7 @@ public class Hotel {
 
 	/**
 	 * Getter id
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -66,6 +69,7 @@ public class Hotel {
 
 	/**
 	 * Setter id
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -74,6 +78,7 @@ public class Hotel {
 
 	/**
 	 * Getter name
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -82,6 +87,7 @@ public class Hotel {
 
 	/**
 	 * Setter name
+	 * 
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -90,6 +96,7 @@ public class Hotel {
 
 	/**
 	 * Getter category
+	 * 
 	 * @return the category
 	 */
 	public Integer getCategory() {
@@ -98,10 +105,11 @@ public class Hotel {
 
 	/**
 	 * Setter category
+	 * 
 	 * @param category the category to set
 	 */
 	public void setCategory(Integer category) {
 		this.category = category;
 	}
-	
+
 }
