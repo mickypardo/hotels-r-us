@@ -45,11 +45,11 @@ public class BookingController {
 	@PostMapping("/res")
 	public ResponseEntity<?> makeBooking(@RequestBody BookingDTO bookingDTO) {
 
-		if (bookingDTO.getHotelDTO() == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		} else if (!bookingService.haveAvailableRooms(bookingDTO.getHotelDTO())) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
+//		if (bookingDTO.getHotelDTO() == null) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//		} else if (!bookingService.haveAvailableRooms(bookingDTO.getHotelDTO())) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
 
 		HotelDTO hotelDTO = bookingDTO.getHotelDTO();
 		Hotel hotel = new Hotel(hotelDTO.getName(), hotelDTO.getCategory());

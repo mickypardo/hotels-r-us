@@ -20,7 +20,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "hotels")
+@Table(name = "hotels", schema = "hotelsrus_database")
 public class Hotel {
 
 	@Id
@@ -28,7 +28,7 @@ public class Hotel {
 	@Column(name = "id_hotel", nullable = false)
 	private Integer id;
 
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "name", length = 30, nullable = false, unique = true)
 	private String name;
 
 	@Column(name = "category")

@@ -1,13 +1,17 @@
 package org.mpardo.hotelsrus.controller;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
+
+import javax.print.attribute.standard.Media;
 
 import org.mpardo.hotelsrus.dto.HotelDTO;
 import org.mpardo.hotelsrus.model.Hotel;
 import org.mpardo.hotelsrus.service.IHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,12 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/hotels")
+@RequestMapping("/hotelsrus/hotels")
 public class HotelController {
 
 	private IHotelService hotelService;
 
-	@Autowired
 	public HotelController(IHotelService hotelService) {
 
 		this.hotelService = hotelService;
@@ -40,7 +44,7 @@ public class HotelController {
 	}
 
 	// Crear un hotel en la BBDD
-	@PostMapping("/ins")
+	@PostMapping(value="/ins", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createHotel(@RequestBody HotelDTO hotelDTO) {
 
 //		if (Optional.of(hotelDTO.getName()).isEmpty()) {
@@ -63,14 +67,14 @@ public class HotelController {
 	@PutMapping("/mod/{id}")
 	public ResponseEntity<?> updateHotel(@PathVariable("id") Integer id, @RequestBody HotelDTO hotelDTO) {
 
-		if (!hotelService.isById(id)) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		} else if (Optional.of(hotelDTO.getName()).isEmpty()) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		} else if (hotelService.isByName(hotelDTO.getName())
-				&& hotelService.getByName(hotelDTO.getName()).get().getId() != id) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
+//		if (!hotelService.isById(id)) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//		} else if (Optional.of(hotelDTO.getName()).isEmpty()) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//		} else if (hotelService.isByName(hotelDTO.getName())
+//				&& hotelService.getByName(hotelDTO.getName()).get().getId() != id) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//		}
 
 		Hotel hotel = hotelService.getOne(id).get();
 		// TO-DO cargar los setters de Hotel con el los getters del HotelDTO
@@ -95,12 +99,11 @@ public class HotelController {
 	}
 
 	// Obtener todos los hoteles existentes en la BBDD
-	@GetMapping("/all")
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Hotel>> listHotels() {
 
-		List<Hotel> hotels = hotelService.getAll();
-
-		return ResponseEntity.status(HttpStatus.OK).body(hotels);
+		List<Hotel> allHotels = hotelService.getAll(); 
+		return ResponseEntity.status(HttpStatus.OK).body(allHotels);
 
 	}
 

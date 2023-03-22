@@ -21,7 +21,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "bookings")
+@Table(name = "bookings", schema = "hotelsrus_database")
 public class Booking {
 
 	@Id
@@ -39,7 +39,7 @@ public class Booking {
 	@Column(name = "date_to")
 	private LocalDate dateTo;
 
-	@Column(name = "email", nullable = false, unique = false)
+	@Column(name = "email", length = 50, nullable = false)
 	private String email;
 
 	/**
