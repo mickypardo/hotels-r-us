@@ -44,7 +44,7 @@ public class HotelController {
 	}
 
 	// Crear un hotel en la BBDD
-	@PostMapping(value="/ins", consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/ins", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createHotel(@RequestBody HotelDTO hotelDTO) {
 
 //		if (Optional.of(hotelDTO.getName()).isEmpty()) {
@@ -57,9 +57,12 @@ public class HotelController {
 		Integer category = hotelDTO.getCategory();
 		Hotel hotel = new Hotel(name, category);
 
-		hotelService.create(hotel);
-
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		try {
+			hotelService.create(hotel);
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 
 	}
 
@@ -77,8 +80,11 @@ public class HotelController {
 //		}
 
 		Hotel hotel = hotelService.getOne(id).get();
-		// TO-DO cargar los setters de Hotel con el los getters del HotelDTO
 
+		hotel.setId(hotelDTO.getId());
+		hotel.setName(hotelDTO.getName());
+		hotel.setCategory(hotelDTO.getCategory());
+		
 		hotelService.update(hotel);
 
 		return ResponseEntity.status(HttpStatus.OK).build();
@@ -90,11 +96,15 @@ public class HotelController {
 	public ResponseEntity<Hotel> findHotelById(@PathVariable("id") Integer id) {
 
 		if (!hotelService.isById(id)) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
-		Hotel hotel = hotelService.getOne(id).get();
-		return ResponseEntity.status(HttpStatus.OK).body(hotel);
+		try {
+			Hotel hotel = hotelService.getOne(id).get();
+			return ResponseEntity.status(HttpStatus.OK).body(hotel);
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 
 	}
 
@@ -102,8 +112,12 @@ public class HotelController {
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Hotel>> listHotels() {
 
-		List<Hotel> allHotels = hotelService.getAll(); 
-		return ResponseEntity.status(HttpStatus.OK).body(allHotels);
+		try {
+			List<Hotel> allHotels = hotelService.getAll(); 
+			return ResponseEntity.status(HttpStatus.OK).body(allHotels);
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 
 	}
 
