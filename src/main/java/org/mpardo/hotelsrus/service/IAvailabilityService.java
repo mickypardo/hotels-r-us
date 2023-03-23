@@ -7,7 +7,9 @@ import org.mpardo.hotelsrus.model.Availability;
 import org.mpardo.hotelsrus.model.Hotel;
 
 /**
- * @author mapar
+ * @author micky pardo
+ * 
+ * @version 1.0
  *
  */
 public interface IAvailabilityService {
@@ -26,5 +28,8 @@ public interface IAvailabilityService {
 
 	// DELETE
 	void delete(Integer id);
+
+	// Obtener filtro de disponibilidades según hotel
+	List<Availability> getAllByHotel(Integer id);
 	
 }

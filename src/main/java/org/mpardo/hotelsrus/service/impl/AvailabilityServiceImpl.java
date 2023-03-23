@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.mpardo.hotelsrus.model.Availability;
 import org.mpardo.hotelsrus.repository.IAvailabilityRepo;
 import org.mpardo.hotelsrus.service.IAvailabilityService;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 /**
@@ -72,6 +73,12 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 	@Override
 	public void delete(Integer id) {
 		availabilityRepo.deleteById(id);
+	}
+	
+	@Override
+	@Query(value = "from hotelsrus_database.availabilities where id_hotel = id")
+	public List<Availability> getAllByHotel(Integer id) {
+		return availabilityRepo.findAllByHotel(id);
 	}
 
 }

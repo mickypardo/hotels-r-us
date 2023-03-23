@@ -1,5 +1,7 @@
 package org.mpardo.hotelsrus.repository;
 
+import java.util.List;
+
 import org.mpardo.hotelsrus.model.Availability;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IAvailabilityRepo extends JpaRepository<Availability, Integer> {
 
+	List<Availability> findAllByHotel(Integer id);
+	
 }
