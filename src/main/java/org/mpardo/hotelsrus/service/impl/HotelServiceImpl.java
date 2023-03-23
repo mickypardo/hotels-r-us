@@ -57,11 +57,11 @@ public class HotelServiceImpl implements IHotelService {
 		return hotelRepo.existsById(id);
 	}
 
-//	@Override
-//	public boolean isByName(String name) {
-//		return hotelRepo.existsByName(name);
-//	}
-//
+	@Override
+	public boolean isByName(String name) {
+		return hotelRepo.existsByName(name);
+	}
+
 //	@Override
 //	public Optional<Hotel> getByName(String name) {
 //		return hotelRepo.findByName(name);

@@ -29,7 +29,7 @@ public interface IHotelService {
 	// OTHERS
 	boolean isById(Integer id);
 
-	//boolean isByName(String name);
+	boolean isByName(String name);
 
 	//Optional<Hotel> getByName(String name);
 	
