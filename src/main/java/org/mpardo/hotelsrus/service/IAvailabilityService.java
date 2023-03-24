@@ -1,5 +1,6 @@
 package org.mpardo.hotelsrus.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public interface IAvailabilityService {
 	// DELETE
 	void delete(Integer id);
 
-	// Obtener filtro de disponibilidades según hotel
-	List<Availability> getAllByHotel(Integer id);
+	// crear disponibilidades según hotel
+	void createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms);
 	
 }

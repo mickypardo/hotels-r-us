@@ -1,5 +1,6 @@
 package org.mpardo.hotelsrus.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Booking {
 	@Column(name = "id_booking")
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_hotel", nullable = false)
 	private Hotel hotel;
 

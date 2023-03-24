@@ -1,5 +1,6 @@
 package org.mpardo.hotelsrus.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class Availability {
 	@Column(name = "date")
 	private LocalDate date;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_hotel", nullable = false)
 	private Hotel hotel;
 

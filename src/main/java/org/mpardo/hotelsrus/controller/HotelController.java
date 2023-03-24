@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/hotelsrus/hotels")
+@RequestMapping("/hotels")
 public class HotelController {
 
 	private IHotelService hotelService;
@@ -43,7 +43,7 @@ public class HotelController {
 	 * @param hotelDTO
 	 * @return la respuesta de la comunicación
 	 */
-	@PostMapping(value="/ins", produces=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/ins", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createHotel(@RequestBody HotelDTO hotelDTO) {
 
 		try {
@@ -66,7 +66,7 @@ public class HotelController {
 	 * @param hotelDTO
 	 * @return la respuesta de la comunicación
 	 */
-	@PutMapping("/mod/{id}")
+	@PutMapping(value = "/mod/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateHotel(@PathVariable("id") Integer id, @RequestBody HotelDTO hotelDTO) {
 
 		if (!hotelService.isById(id)) {
@@ -94,7 +94,7 @@ public class HotelController {
 	 * @param id
 	 * @return La respuesta de la comunicación y el hotel en cuestión
 	 */
-	@GetMapping("/one/{id}")
+	@GetMapping(value = "/one/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Hotel> findHotelById(@PathVariable("id") Integer id) {
 
 		if (!hotelService.isById(id)) {
@@ -115,7 +115,7 @@ public class HotelController {
 	 * 
 	 * @return la respuesta de la comunicación y la lista de hoteles
 	 */
-	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Hotel>> listHotels() {
 
 		try {

@@ -1,9 +1,11 @@
 package org.mpardo.hotelsrus.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.mpardo.hotelsrus.model.Availability;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,6 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IAvailabilityRepo extends JpaRepository<Availability, Integer> {
 
+	@Query(value = "SELECT * FROM hotelsrus_database.availabilities WHERE id_hotel = ?1")
 	List<Availability> findAllByHotel(Integer id);
-	
 }

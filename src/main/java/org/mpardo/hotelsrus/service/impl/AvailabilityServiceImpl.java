@@ -1,5 +1,6 @@
 package org.mpardo.hotelsrus.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,11 +75,21 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 	public void delete(Integer id) {
 		availabilityRepo.deleteById(id);
 	}
-	
+
 	@Override
-	@Query(value = "from hotelsrus_database.availabilities where id_hotel = id")
-	public List<Availability> getAllByHotel(Integer id) {
-		return availabilityRepo.findAllByHotel(id);
+	public void createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms) {
+		List<Availability> listAvailByHotel = availabilityRepo.findAllByHotel(idHotel);
+		for (LocalDate date : range) {
+			
+			for (Availability avail : listAvailByHotel) {
+				
+				if(avail.getDate() == date) {
+					avail.setRooms(avail.getRooms()+rooms);
+				} else {
+					availabilityRepo.create();
+				}
+			
+		}
 	}
 
 }

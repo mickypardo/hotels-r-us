@@ -10,7 +10,7 @@ public class GlobalErrorHandler {
 
 	@ExceptionHandler(value = RuntimeException.class)
 	public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
-		return new ResponseEntity<>(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(new Error("Error interno del servidor:", ex.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 }

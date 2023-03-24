@@ -10,6 +10,7 @@ import org.mpardo.hotelsrus.model.Hotel;
 import org.mpardo.hotelsrus.service.IBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,35 +43,28 @@ public class BookingController {
 	}
 
 	// Hacer una reserva de un hotel en la BBDD
-	@PostMapping("/res")
-	public ResponseEntity<?> makeBooking(@RequestBody BookingDTO bookingDTO) {
-
-//		if (bookingDTO.getHotelDTO() == null) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//		} else if (!bookingService.haveAvailableRooms(bookingDTO.getHotelDTO())) {
-//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//		}
-
-		HotelDTO hotelDTO = bookingDTO.getHotelDTO();
-		Hotel hotel = new Hotel(hotelDTO.getName(), hotelDTO.getCategory());
-		LocalDate dateFrom = bookingDTO.getDateFrom();
-		LocalDate dateTo = bookingDTO.getDateTo();
-		String email = bookingDTO.getEmail();
-
-		Booking booking = new Booking(hotel, dateFrom, dateTo, email);
-
-		bookingService.create(booking);
-
-		return ResponseEntity.status(HttpStatus.CREATED).build();
-
-	}
+//	@PostMapping("/res")
+//	public ResponseEntity<?> makeBooking(@RequestBody BookingDTO bookingDTO) {
+//
+//		HotelDTO hotelDTO = bookingDTO.getHotelDTO();
+//		Hotel hotel = new Hotel(hotelDTO.getName(), hotelDTO.getCategory());
+//		LocalDate dateFrom = bookingDTO.getDateFrom();
+//		LocalDate dateTo = bookingDTO.getDateTo();
+//		String email = bookingDTO.getEmail();
+//
+//		Booking booking = new Booking(hotel, dateFrom, dateTo, email);
+//
+//		bookingService.create(booking);
+//
+//		return ResponseEntity.status(HttpStatus.CREATED).build();
+//
+//	}
 
 	// Consultar todas las reservas de un hotel
-	@GetMapping("/all")
-	public ResponseEntity<List<Booking>> listBooking() {
+	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Booking>> listBookings() {
 
 		List<Booking> bookings = bookingService.getAll();
-
 		return ResponseEntity.status(HttpStatus.OK).body(bookings);
 	}
 
@@ -88,16 +82,16 @@ public class BookingController {
 	}
 
 	// Cancelar una reserva
-	@DeleteMapping("/del/ {id}")
-	public ResponseEntity<?> cancelBookingById(@PathVariable("id") Integer id) {
-
-		if (!bookingService.isById(id)) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
-
-		bookingService.delete(id);
-
-		return ResponseEntity.status(HttpStatus.OK).build();
-	}
+//	@DeleteMapping("/del/ {id}")
+//	public ResponseEntity<?> cancelBookingById(@PathVariable("id") Integer id) {
+//
+//		if (!bookingService.isById(id)) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+//		}
+//
+//		bookingService.delete(id);
+//
+//		return ResponseEntity.status(HttpStatus.OK).build();
+//	}
 
 }
