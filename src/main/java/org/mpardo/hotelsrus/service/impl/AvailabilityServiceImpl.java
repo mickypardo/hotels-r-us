@@ -77,7 +77,7 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 	}
 
 	@Override
-	public void createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms) {
+	public List<Availability> createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms) {
 		List<Availability> listAvailByHotel = availabilityRepo.findAllByHotel(idHotel);
 		for (LocalDate date : range) {
 			
@@ -86,10 +86,11 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 				if(avail.getDate() == date) {
 					avail.setRooms(avail.getRooms()+rooms);
 				} else {
-					availabilityRepo.create();
+					availabilityRepo.save(avail);
 				}
 			
+			}
 		}
+		return listAvailByHotel;
 	}
-
 }

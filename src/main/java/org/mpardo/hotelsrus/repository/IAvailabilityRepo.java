@@ -19,6 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IAvailabilityRepo extends JpaRepository<Availability, Integer> {
 
-	@Query(value = "SELECT * FROM hotelsrus_database.availabilities WHERE id_hotel = ?1")
+	@Query(value = "SELECT * FROM hotelsrus_database.availabilities WHERE id_hotel = ?1",nativeQuery = true)
 	List<Availability> findAllByHotel(Integer id);
 }

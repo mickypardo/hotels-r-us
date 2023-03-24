@@ -31,6 +31,6 @@ public interface IAvailabilityService {
 	void delete(Integer id);
 
 	// crear disponibilidades según hotel
-	void createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms);
+	List<Availability> createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms);
 	
 }
