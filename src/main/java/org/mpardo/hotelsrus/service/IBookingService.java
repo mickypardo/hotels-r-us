@@ -3,16 +3,13 @@ package org.mpardo.hotelsrus.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.mpardo.hotelsrus.dto.BookingDTO;
-import org.mpardo.hotelsrus.dto.HotelDTO;
 import org.mpardo.hotelsrus.model.Booking;
-import org.mpardo.hotelsrus.model.Hotel;
 
 /**
+ * Interfaz del servicio Booking
+ * 
  * @author micky pardo
  * 
- * @version 1.0
- *
  */
 public interface IBookingService {
 
@@ -34,6 +31,6 @@ public interface IBookingService {
 	// OTHERS
 	boolean isById(Integer id);
 
-	boolean haveAvailableRooms(HotelDTO hotelDTO);
+	List<Booking> getAllByHotel(Integer id);
 
 }

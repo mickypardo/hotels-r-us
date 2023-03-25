@@ -16,6 +16,11 @@ import java.time.LocalDate;
  */
 public class BookingDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8912500832056387061L;
+
 	private Integer id;
 
 	private HotelDTO hotelDTO;

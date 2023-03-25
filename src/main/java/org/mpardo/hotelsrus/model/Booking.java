@@ -1,6 +1,5 @@
 package org.mpardo.hotelsrus.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;

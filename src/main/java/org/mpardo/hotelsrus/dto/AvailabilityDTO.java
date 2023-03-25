@@ -13,6 +13,11 @@ import java.time.LocalDate;
  */
 public class AvailabilityDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9179252455825260118L;
+
 	private Integer id;
 
 	private LocalDate date;

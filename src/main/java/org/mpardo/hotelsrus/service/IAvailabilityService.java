@@ -1,17 +1,15 @@
 package org.mpardo.hotelsrus.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.mpardo.hotelsrus.model.Availability;
-import org.mpardo.hotelsrus.model.Hotel;
 
 /**
+ * Interfaz del servicio Availability
+ * 
  * @author micky pardo
  * 
- * @version 1.0
- *
  */
 public interface IAvailabilityService {
 
@@ -30,7 +28,8 @@ public interface IAvailabilityService {
 	// DELETE
 	void delete(Integer id);
 
-	// crear disponibilidades según hotel
-	List<Availability> createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms);
+	List<Availability> getAllByIdHotel(Integer id);
+
+	void updateRoom(Availability avail);
 	
 }

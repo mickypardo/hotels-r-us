@@ -1,13 +1,11 @@
 package org.mpardo.hotelsrus.service.impl;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.mpardo.hotelsrus.model.Availability;
 import org.mpardo.hotelsrus.repository.IAvailabilityRepo;
 import org.mpardo.hotelsrus.service.IAvailabilityService;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 /**
@@ -53,11 +51,7 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 	public Optional<Availability> getOne(Integer id) {
 		return availabilityRepo.findById(id);
 	}
-
-	public boolean getById(Integer id) {
-		return availabilityRepo.existsById(id);
-	}
-
+	
 	/********************************
 	 ************ UPDATE ************
 	 ********************************/
@@ -77,20 +71,14 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 	}
 
 	@Override
-	public List<Availability> createAvailabilitiesByHotel(Integer idHotel, List<LocalDate> range, Integer rooms) {
-		List<Availability> listAvailByHotel = availabilityRepo.findAllByHotel(idHotel);
-		for (LocalDate date : range) {
-			
-			for (Availability avail : listAvailByHotel) {
-				
-				if(avail.getDate() == date) {
-					avail.setRooms(avail.getRooms()+rooms);
-				} else {
-					availabilityRepo.save(avail);
-				}
-			
-			}
-		}
-		return listAvailByHotel;
+	public List<Availability> getAllByIdHotel(Integer id) {
+		return availabilityRepo.findAllByIdHotel(id);
 	}
+
+	@Override
+	public void updateRoom(Availability avail) {
+		availabilityRepo.updateTheRooms(avail.getId());		
+	}
+
+
 }

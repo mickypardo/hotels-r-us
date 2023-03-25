@@ -3,7 +3,6 @@ package org.mpardo.hotelsrus.service.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.mpardo.hotelsrus.dto.HotelDTO;
 import org.mpardo.hotelsrus.model.Booking;
 import org.mpardo.hotelsrus.repository.IBookingRepo;
 import org.mpardo.hotelsrus.service.IBookingService;
@@ -53,10 +52,6 @@ public class BookingServiceImpl implements IBookingService {
 		return bookingRepo.findById(id);
 	}
 
-	public boolean getById(Integer id) {
-		return bookingRepo.existsById(id);
-	}
-
 	/********************************
 	 ************ UPDATE ************
 	 ********************************/
@@ -81,14 +76,12 @@ public class BookingServiceImpl implements IBookingService {
 
 	@Override
 	public boolean isById(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		return bookingRepo.existsById(id);
 	}
 
 	@Override
-	public boolean haveAvailableRooms(HotelDTO hotelDTO) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<Booking> getAllByHotel(Integer id) {
+		return bookingRepo.findAllByHotel(id);
 	}
 
 }

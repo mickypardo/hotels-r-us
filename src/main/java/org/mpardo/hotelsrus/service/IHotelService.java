@@ -3,11 +3,14 @@ package org.mpardo.hotelsrus.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.mpardo.hotelsrus.filter.HotelFilter;
 import org.mpardo.hotelsrus.model.Hotel;
 
 /**
+ * Interfaz del servicio Hotel
+ * 
  * @author micky pardo
- *
+ * 
  */
 public interface IHotelService {
 
@@ -31,6 +34,6 @@ public interface IHotelService {
 
 	boolean isByName(String name);
 
-	//Optional<Hotel> getByName(String name);
+	List<Hotel> getAllByCriteria(HotelFilter hotelFilter);
 	
 }

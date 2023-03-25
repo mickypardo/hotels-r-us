@@ -1,6 +1,5 @@
 package org.mpardo.hotelsrus.repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.mpardo.hotelsrus.model.Availability;
@@ -13,12 +12,16 @@ import org.springframework.stereotype.Repository;
  * 
  * @author micky pardo
  * 
- * @version 0.5
+ * @version 1.0
  *
  */
 @Repository
 public interface IAvailabilityRepo extends JpaRepository<Availability, Integer> {
 
-	@Query(value = "SELECT * FROM hotelsrus_database.availabilities WHERE id_hotel = ?1",nativeQuery = true)
-	List<Availability> findAllByHotel(Integer id);
+	@Query(value = "SELECT * FROM hotelsrus_database.availabilities WHERE id_hotel = ?1", nativeQuery = true)
+	List<Availability> findAllByIdHotel(Integer id);
+
+	@Query(value = "UPDATE hotelsrus_database.availabilities SET rooms = rooms-1 WHERE id_availability = ?1 ", nativeQuery = true)
+	void updateTheRooms(Integer id);
+
 }

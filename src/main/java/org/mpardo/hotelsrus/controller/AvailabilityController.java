@@ -1,37 +1,25 @@
 package org.mpardo.hotelsrus.controller;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
-import org.mpardo.hotelsrus.dto.AvailabilityDTO;
-import org.mpardo.hotelsrus.dto.HotelDTO;
+import org.mpardo.hotelsrus.filter.HotelFilter;
 import org.mpardo.hotelsrus.model.Availability;
 import org.mpardo.hotelsrus.model.Hotel;
 import org.mpardo.hotelsrus.service.IAvailabilityService;
 import org.mpardo.hotelsrus.service.IHotelService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -88,6 +76,15 @@ public class AvailabilityController {
 
 	}
 
+	/**
+	 * Añade habitaciones disponibles en un hotel con un rango de fechas dadas
+	 * 
+	 * @param idHotel la id del hotel
+	 * @param dateFrom la fecha de entrada
+	 * @param dateTo la fecha de salida
+	 * @param rooms el número de habitaciones a abrir
+	 * @return la respuesta de la comunicación y si todo ha ido bien
+	 */
 	@PutMapping(value = "/availability/{id_hotel}/{date_from}/{date_to}/{rooms}")
 	public ResponseEntity<?> openAvailability(@PathVariable("id_hotel") Integer idHotel, 
 			@PathVariable("date_from") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate dateFrom,
@@ -123,12 +120,19 @@ public class AvailabilityController {
 
 	}
 	
-	@GetMapping(value = "/availability/{date_in}/{date_out}")
+	/**
+	 * Obtener la lista de hoteles que tenga disponibles habitaciones en un rango de fechas
+	 * @param dateIn la fecha de entrada
+	 * @param dateOut la fecha de salida
+	 * @return la lista de hoteles, puede venir filtrada por un criterio en cuestión
+	 */
+	@GetMapping(value = "/criteria/{date_in}/{date_out}")
 	public ResponseEntity<List<Hotel>> getAvailabilityByDateRange(
-			@PathVariable("dateIn") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateIn, 
-			@PathVariable("dateOut") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOut) {
+			@PathVariable("date_in") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateIn, 
+			@PathVariable("date_out") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOut,
+			HotelFilter hotelFilter) {
 		
-		List<Hotel> hotelsWithAvailability = new ArrayList();
+		List<Hotel> hotelsWithAvailability = new ArrayList<Hotel>();
 		
 		//Obtengo el rango de fechas
 		long numberOfDays = ChronoUnit.DAYS.between(dateIn, dateOut) + 1;
@@ -136,6 +140,7 @@ public class AvailabilityController {
 				.limit(numberOfDays).collect(Collectors.toList());
 		
 		//Obtengo listado de disponibles según hotel
+//		List<Hotel> listHotels = hotelService.getAllByCriteria(hotelFilter);
 		List<Hotel> listHotels = hotelService.getAll();
 		for (Hotel hotel : listHotels) {
 		
@@ -150,7 +155,7 @@ public class AvailabilityController {
 						.findFirst().orElse(null);
 				
 				if (availability == null) {
-					// Con que halla uno nulo ya no me vale
+					// Con que haya uno nulo ya no me vale
 					thereIsOneNull = true;
 				}
 				

@@ -12,6 +12,11 @@ import java.io.Serializable;
  */
 public class HotelDTO implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1132230592907995628L;
+
 	private Integer id;
 
 	private String name;

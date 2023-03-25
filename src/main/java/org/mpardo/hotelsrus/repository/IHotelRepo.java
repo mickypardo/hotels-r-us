@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * 
  * @author micky pardo
  * 
- * @version 0.5
+ * @version 1.0
  *
  */
 @Repository
