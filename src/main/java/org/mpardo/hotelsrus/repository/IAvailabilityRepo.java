@@ -21,7 +21,4 @@ public interface IAvailabilityRepo extends JpaRepository<Availability, Integer> 
 	@Query(value = "SELECT * FROM hotelsrus_database.availabilities WHERE id_hotel = ?1", nativeQuery = true)
 	List<Availability> findAllByIdHotel(Integer id);
 
-	@Query(value = "UPDATE hotelsrus_database.availabilities SET rooms = rooms-1 WHERE id_availability = ?1 ", nativeQuery = true)
-	void updateTheRooms(Integer id);
-
 }

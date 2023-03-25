@@ -28,8 +28,7 @@ public interface IAvailabilityService {
 	// DELETE
 	void delete(Integer id);
 
+	// OTHERS
 	List<Availability> getAllByIdHotel(Integer id);
-
-	void updateRoom(Availability avail);
 	
 }

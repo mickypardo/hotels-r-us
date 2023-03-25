@@ -60,13 +60,36 @@ public class BookingController {
 			@PathVariable("date_out") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateOut,
 			@PathVariable("email") String email) {
 
-		Hotel hotel = hotelService.getOne(idHotel).get();
-		Booking booking = new Booking(hotel, dateIn, dateOut, email);
-
-		bookingService.create(booking);
-
-		return ResponseEntity.status(HttpStatus.CREATED).build();
-
+		List<LocalDate> listDateAvail = new ArrayList<>();
+		
+		long numberOfDaysToBooking = ChronoUnit.DAYS.between(dateIn, dateOut) + 1;
+		List<LocalDate> rangeBooking = Stream.iterate(dateIn, date -> date.plusDays(1)).limit(numberOfDaysToBooking)
+				.collect(Collectors.toList());
+		
+		List<Availability> listAvail = availabilityService.getAllByIdHotel(idHotel);
+		
+		for (Availability avail : listAvail) {
+			listDateAvail.add(avail.getDate());
+		}
+		
+		if (listDateAvail.containsAll(rangeBooking)) {
+			for (Availability avail : listAvail) {
+				if (rangeBooking.contains(avail.getDate())) {
+					avail.setRooms(avail.getRooms() - 1);
+					availabilityService.update(avail);
+				}
+			}
+			
+			Booking booking = new Booking(hotelService.getOne(idHotel).get(), dateIn, dateOut, email);
+			
+			bookingService.create(booking);
+			
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		} else {
+			// No hay habitaciones disponibles
+			return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+		}
+		
 	}
 
 	// Consultar todas las reservas de un hotel
@@ -139,7 +162,8 @@ public class BookingController {
 		for (Availability avail : listAvail) {
 			
 			if (rangeBooking.contains(avail.getDate())) {
-				availabilityService.updateRoom(avail);
+				avail.setRooms(avail.getRooms() + 1);
+				availabilityService.update(avail);
 			}
 			
 		}

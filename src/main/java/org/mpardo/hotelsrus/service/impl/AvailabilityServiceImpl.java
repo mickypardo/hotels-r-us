@@ -75,10 +75,4 @@ public class AvailabilityServiceImpl implements IAvailabilityService {
 		return availabilityRepo.findAllByIdHotel(id);
 	}
 
-	@Override
-	public void updateRoom(Availability avail) {
-		availabilityRepo.updateTheRooms(avail.getId());		
-	}
-
-
 }
