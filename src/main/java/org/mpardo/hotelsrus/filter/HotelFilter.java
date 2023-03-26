@@ -3,7 +3,9 @@ package org.mpardo.hotelsrus.filter;
 public class HotelFilter {
 	
 	private String name;
+	
 	private String category;
+	
 	/**
 	 * @return the name
 	 */
